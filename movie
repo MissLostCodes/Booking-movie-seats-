@@ -1,0 +1,113 @@
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+public class MOVIE_BOOKING{
+
+	public static void main(String[] args) {
+		JFrame movie = new JFrame("BOOK YOUR THEATRE SEATS ");
+		   
+		   
+		   JButton go_to_hall_2 = new JButton("click to view theatre 2");
+		   JButton go_to_hall_1 = new JButton("click to view theatre 1");
+		   
+		   JLabel guide1 = new  JLabel("-----------Click the seat you want to book--------- ");
+		   JLabel guide2 = new  JLabel("-----------Click the seat you want to book--------- ");
+		   JLabel inv1  = new  JLabel("THEATRE 1 SCREEN ");
+		   JLabel inv2  = new  JLabel("THEATRE 2 SCREEN ");
+		   JButton c1  = new  JButton("T1 -silver seat 1");
+		   JButton c2  = new  JButton("T1 -silver seat 2 ");
+		   JButton c3 = new  JButton("T1 -golden seat 1");
+		   JButton c4  = new  JButton("T1-golden seat 2 ");
+		   JButton c5 = new  JButton("T1-diamond seat 1");
+		   JButton c6 = new  JButton("T1-diamond seat 2 ");
+		   JButton c7  = new  JButton("T2-silver seat 1");
+		   JButton c8  = new  JButton("T2-silver seat 2 ");
+		   JButton c9 = new  JButton("T2-golden seat 1");
+		   JButton c10  = new  JButton("T2-golden seat 2 ");
+		   JButton c11 = new  JButton("T2-diamond seat 1");
+		   JButton c12 = new  JButton("T2-diamond seat 2 ");
+		   
+		   
+		   JPanel room1 = new JPanel();
+		   JPanel room2 = new JPanel();
+		   
+		   JPanel one_to_six = new JPanel(new GridLayout(3, 2 ,50,50)); 
+		   JPanel six_to_twelve  = new JPanel(new GridLayout(3, 2 ,50,50)); 
+		  
+		   // Create a panel with CardLayout
+		   JPanel cardPanel = new JPanel(new CardLayout());
+		   cardPanel.add(room1, "Room1");
+		   cardPanel.add(room2, "Room2");
+           
+		   room2.add(guide2 , BorderLayout.NORTH);
+	       room1.add(guide1 ,BorderLayout.NORTH); 
+		   
+	       room1.add(inv1 ,BorderLayout.NORTH );
+		   room2.add(inv2 , BorderLayout.NORTH);
+		   
+		 
+		   one_to_six.add(c1);  one_to_six.add(c2);  one_to_six.add(c3);
+		   one_to_six.add(c4);  one_to_six.add(c5);  one_to_six.add(c6);
+		  
+		   six_to_twelve.add(c7);six_to_twelve.add(c8);six_to_twelve.add(c9);
+		   six_to_twelve.add(c10); six_to_twelve.add(c11);six_to_twelve.add(c12); 
+		  
+		   room1.add(one_to_six, BorderLayout.CENTER);
+		   room2.add(six_to_twelve, BorderLayout.CENTER);
+		   
+		   room1.add(go_to_hall_2 , BorderLayout.SOUTH);
+	       room2.add(go_to_hall_1 , BorderLayout.SOUTH ); 
+	       
+	      
+		   movie.add(cardPanel);
+		  
+		   JButton[] buttons = {c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12};
+	        final int booked_t1[] = {0};
+	        final int booked_t2[] = {0};
+	        for (int i =0 ; i<buttons.length ; i++) {
+	            final int index = i;
+	            buttons[i].addActionListener(new ActionListener() {
+	                public void actionPerformed(ActionEvent e) {
+	                    buttons[index].setText("------Booked------");
+	                    buttons[index].setEnabled(false);
+	                     if (index < 6) {
+	                        booked_t1[0]++;
+	                        if (booked_t1[0] == 6) {
+	                            guide1.setText("------------------------HOUSEFULL-----------------------");
+	                        }
+	                    } else {
+	                        booked_t2[0]++;
+	                        if (booked_t2[0] == 6) {
+	                            guide2.setText("-------------------------HOUSEFULL-----------------------");
+	                        }
+	                    }
+	                }
+	            });
+	        }   
+		   go_to_hall_1.addActionListener(new ActionListener() {
+		       
+		       public void actionPerformed(ActionEvent e) {
+		           CardLayout cardLayout = (CardLayout) cardPanel.getLayout();
+		           cardLayout.show(cardPanel, "Room1");
+		       }
+		   });
+
+		   go_to_hall_2.addActionListener(new ActionListener() {
+		       
+		       public void actionPerformed(ActionEvent e) {
+		           CardLayout cardLayout = (CardLayout) cardPanel.getLayout();
+		           cardLayout.show(cardPanel, "Room2");
+		       }
+		   });
+		   movie.setSize(400, 450);
+		   
+		   movie.setVisible(true);
+		   movie.setTitle("MOVIE THEATRE");
+		   movie.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		   
+		  
+
+	}}
+
